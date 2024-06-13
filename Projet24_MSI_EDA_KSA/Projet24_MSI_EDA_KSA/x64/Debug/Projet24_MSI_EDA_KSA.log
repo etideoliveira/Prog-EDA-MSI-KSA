@@ -1,0 +1,13 @@
+﻿  main.c
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(276,19): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(281,19): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(308,25): warning C4047: 'fonction' : les niveaux d'indirection de 'int' et de 'char [50]' sont différents
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(308,17): warning C4024: 'log_binaire' : types différents pour le paramètre formel et réel 1
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(335,32): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(340,30): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(345,28): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(352,31): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(360,57): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(457,55): warning C4305: 'fonction' : troncation de 'double' à 'float'
+C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(457,66): warning C4305: 'fonction' : troncation de 'double' à 'float'
+  Projet24_MSI_EDA_KSA.vcxproj -> C:\Users\karstopa\Education Vaud\Matteo Antonino Stefanelli - PROJET_PROG_EDO_KSA_MSI\02 - Prog\Projet24_MSI_EDA_KSA\x64\Debug\Projet24_MSI_EDA_KSA.exe
