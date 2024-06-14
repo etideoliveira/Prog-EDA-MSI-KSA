@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------------//
 // Nom du projet 		:
 // Nom du fichier 		:
-// Date de création 	: 07.03.2024
+// Date de crÃ©ation 	: 07.03.2024
 // Date de modification :
 //
 // Auteur 				: Etienne De Oliveira
@@ -9,7 +9,7 @@
 // Description          :
 //----------------------------------------------------------------------------------//
 
-//-- délcaration des libraires systèmes --//
+//-- dÃ©lcaration des libraires systÃ¨mes --//
 #pragma warning(disable: 4996)
 #include "main.h"
 #include <stdio.h>
@@ -26,63 +26,69 @@
 // 30.05.2024	//
 //--------------//
 
-// Définition du chemin et du nom du fichier des logs
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <time.h>
+
+// DÃ©finition du chemin et du nom du fichier des logs
 #define FICHIER_LOG "Logs.log"
 
 // Compteur pour le nombre d'utilisation des fonctions
 int NbrUtilisationBin = 0; // Compteur pour la fonction Binaire
-int NbrUtilisationTri = 0; // Compteur pour la fonction Trigonométrique
+int NbrUtilisationTri = 0; // Compteur pour la fonction TrigonomÃ©trique
 
-// Fonction pour avoir la date actuel dans la chaîne de caractères
+// Fonction pour avoir la date actuel dans la chaÃ®ne de caractÃ¨res
 const char* date()
 {
     static char buffer_date[11]; // Buffer pour stocker la date
     time_t date; // Variable pour la date actuel
     struct tm date_info; // Structure pour les informations de date
-    time(&date); // Obtention de la date actuel
+    time(&date); // Obtention de la date actuel en secondes (Ã©poque Unix)
 
-    // Utilisation de localtime_s pour obtenir les informations sur la date
+    // Utilisation de localtime_s pour formater la date sous forme lisible
     localtime_s(&date_info, &date);
 
-    // Formater la date en chaîne de caractères "YYYY-MM-DD"
+    // Formater la date en chaÃ®ne de caractÃ¨res "YYYY-MM-DD"
     strftime(buffer_date, sizeof(buffer_date), "%d.%m.%Y", &date_info);
-    return buffer_date; // Retourner la chaîne de caractères
+    return buffer_date; // Retourner la chaÃ®ne de caractÃ¨res
 }
 
-// Fonction pour avoir l'heure actuel dans la chaîne de caractères
+// Fonction pour avoir l'heure actuel dans la chaÃ®ne de caractÃ¨res
 const char* heure()
 {
     static char buffer_heure[6]; // Buffer pour stocker l'heure
     time_t heure; // Variable pour l'heure actuel
     struct tm heure_info; // Structure pour les informations d'heure
-    time(&heure); // Obtention de l'heure acutel
+    time(&heure); // Obtention de l'heure acutel en secondes (Ã©poque Unix)
 
-    // Utilisation de localtime_s pour obtenir les informations sur l'heure
+    // Utilisation de localtime_s pour formater la date sous forme lisible
     localtime_s(&heure_info, &heure);
 
-    // Formater l'heure en chaîne de caractères
+    // Formater l'heure en chaÃ®ne de caractÃ¨res
     strftime(buffer_heure, sizeof(buffer_heure), "%H:%M", &heure_info);
-    return buffer_heure; // Retourner la chaîne de caractères
+    return buffer_heure; // Retourner la chaÃ®ne de caractÃ¨res
 }
-// Fonction pour écrire une ligne de texte dans le fichier de log
+// Fonction pour Ã©crire une ligne de texte dans le fichier de log
 void ecrire_log(const char* format, ...)
 {
+    // DÃ©claration du pointeur vers l'objet FILE
     FILE* fichier_log;
 
     // Utilisation de fopen_s pour ouvrir le fichier de logs 
     errno_t err = fopen_s(&fichier_log, FICHIER_LOG, "a");
 
-    // Vérifie si le fichier est ouvert correctement
+    // VÃ©rifie si le fichier est ouvert correctement
     if (err != 0)
     {
-        // Affiche une erreur si le fichier ne peut pas être ouvert
+        // Affiche une erreur si le fichier ne peut pas Ãªtre ouvert
         fprintf(stderr, "Erreur d'ouverture du fichier de log\n");
         return; // Quitter la fonction en cas d'erreur
     }
-    // Écrire le message formaté dans les logs
+    // Ã‰crire le message formatÃ© dans les logs
     va_list args; // Liste d'arguments variadiques (nbr qui peut varier)
     va_start(args, format); // Inistaliser la liste d'arguments
-    vfprintf(fichier_log, format, args); // Écrire le message formaté dans le fichier
+    vfprintf(fichier_log, format, args); // Ã‰crire le message formatÃ© dans le fichier
     va_end(args); // Terminer la liste d'arguments
 
     // Ajouter une nouvelle ligne
@@ -91,22 +97,36 @@ void ecrire_log(const char* format, ...)
     // Fermer le fichier de log
     fclose(fichier_log);
 }
-// Fonction binaire (exemple)
-void log_binaire(int entree, int resultat)
+
+void log_binaire(int entree, int* resultat)
 {
-    NbrUtilisationBin++; // Incrémenter le compteur de la fonction binaire
-    // Écrire le log pour la fonction binaire
-    ecrire_log("compteur utilisation fonction binaire : %02d\n", NbrUtilisationBin);
-    ecrire_log("%s - %s\n%d / %0b\n", date(), heure(), entree, resultat);
+    NbrUtilisationBin++; // IncrÃ©menter le compteur de la fonction binaire
+
+    // DÃ©terminer la taille effective du tableau en fonction de la valeur binaire
+    int taille = 0;
+    while (resultat[taille] == 0 || resultat[taille] == 1) {
+        taille++;
+    }
+
+    // Conversion du tableau en chaÃ®ne de caractÃ¨res
+    char resultat_binaire[33];
+    for (int i = 0; i < taille; i++) {
+        resultat_binaire[i] = resultat[i] ? '1' : '0';
+    }
+    resultat_binaire[taille] = '\0'; // Ajouter le terminateur de chaÃ®ne
+
+    // Ã‰crire le log pour la fonction binaire
+    ecrire_log("%s - %s\n%d / %s\n", date(), heure(), entree, resultat_binaire);
 }
-// Fonction trigonométrique (exemple)
-void log_trigonometrie(float entree1, float entree2, float x, float y, float z, float a, float b, float c, float resultat)
+
+// Fonction trigonomÃ©trique
+void log_trigonometrie(float entree1, float entree2, float adj, float opp, float hyp, float sin, float cos, float tan, float resultat)
 {
-    NbrUtilisationTri++; // Incrémenter le compteur de la fonction trigonométrique
-    // Écrire le log pour la fonction trigonométrique
-    ecrire_log("compteur utilisation fonction trigonométrique : %02d\n", NbrUtilisationTri);
+    NbrUtilisationTri++; // IncrÃ©menter le compteur de la fonction trigonomÃ©trique
+    // Ã‰crire le log pour la fonction trigonomÃ©trique
+    ecrire_log("compteur utilisation fonction trigonomÃ©trique : %02d\n", NbrUtilisationTri);
     ecrire_log("%s - %s\n%.1f, %.1f / %.1f, %.1f, %.1f, %.1f, %.1f, %.1f, %.2f\n",
-        date(), heure(), entree1, entree2, x, y, z, a, b, c, resultat);
+        date(), heure(), entree1, entree2, adj, opp, hyp, sin, cos, tan, resultat);
 }
 //-------------------------------------------------------------------------------------------------------
 
@@ -116,15 +136,15 @@ void log_trigonometrie(float entree1, float entree2, float x, float y, float z, 
  *                                                             *
  * Description : Cette fonction additionne deux entiers.       *
  *                                                             *
- * Paramètres d'entrée :                                       *
+ * ParamÃ¨tres d'entrÃ©e :                                       *
  *   - a : Premier entier                                      *
- *   - b : Deuxième entier                                     *
+ *   - b : DeuxiÃ¨me entier                                     *
  *                                                             *
- * Paramètre de sortie :                                       *
- *   Le résultat de l'addition.                                *
+ * ParamÃ¨tre de sortie :                                       *
+ *   Le rÃ©sultat de l'addition.                                *
  *                                                             *
  ***************************************************************/
-// Fonction pour la conversion des entiers en binaire sans spécification de bits
+// Fonction pour la conversion des entiers en binaire sans spÃ©cification de bits
 void ConversionEntier(int num) {
     if (num == 0) {
         printf("0");
@@ -140,7 +160,7 @@ void ConversionEntier(int num) {
         num >>= 1;
     }
 
-    // Trouver la première position de 1
+    // Trouver la premiÃ¨re position de 1
     for (int i = 0; i < size; i++) {
         if (tbBin[i] == '1') {
             debut = i;
@@ -154,7 +174,7 @@ void ConversionEntier(int num) {
     }
 }
 
-// Fonction pour la conversion des entiers en binaire avec spécification de bits
+// Fonction pour la conversion des entiers en binaire avec spÃ©cification de bits
 void ConversionEntierBits(int num, int bits) {
     int mask = (1 << (bits - 1));
     if (num < 0) {
@@ -169,7 +189,7 @@ void ConversionEntierBits(int num, int bits) {
     }
 }
 
-// Fonction pour la conversion des nombres réels en binaire
+// Fonction pour la conversion des nombres rÃ©els en binaire
 void ConversionReelBin(float num) {
     int partEntiere = (int)num;
     float partFract = num - partEntiere;
@@ -206,7 +226,7 @@ void AffBin(int num, float numReel, char* ptoption) {
             printf("0b ");
             ConversionEntier(num);
         }
-        else {  // C'est un nombre réel
+        else {  // C'est un nombre rÃ©el
             ConversionReelBin(numReel);
         }
         printf("\n");
@@ -304,8 +324,11 @@ int Convert() {
 
     AffBin(numEntier, numReel, option);
 
+    // Tableau pour tester log_binaire
+    int tbtest[] = { 1, 1, 1, 0, 1, };
+
     // enregistrement des log binaire
-    log_binaire(tbEntree, 0b011111);
+    log_binaire(tbEntree, tbtest);
 
     return 0;
 }
@@ -318,30 +341,30 @@ int Convert() {
  *                                                             *
  * Description : Cette fonction additionne deux entiers.       *
  *                                                             *
- * Paramètres d'entrée :                                       *
+ * ParamÃ¨tres d'entrÃ©e :                                       *
  *   - a : Premier entier                                      *
- *   - b : Deuxième entier                                     *
+ *   - b : DeuxiÃ¨me entier                                     *
  *                                                             *
- * Paramètre de sortie :                                       *
- *   Le résultat de l'addition.                                *
+ * ParamÃ¨tre de sortie :                                       *
+ *   Le rÃ©sultat de l'addition.                                *
  *                                                             *
  ***************************************************************/
- // Fonction pour calculer le côté manquant du triangle rectangle
+ // Fonction pour calculer le cÃ´tÃ© manquant du triangle rectangle
 void calculFaceManquante(Triangle* triangle, int choix)
 {
     if (choix == 1)
     {
-        // Calculer l'hypoténuse
+        // Calculer l'hypotÃ©nuse
         triangle->hypotenuse = sqrt(pow(triangle->adjacent, 2) + pow(triangle->oppose, 2));
     }
     else if (choix == 2)
     {
-        // Calculer le côté adjacent
+        // Calculer le cÃ´tÃ© adjacent
         triangle->adjacent = sqrt(pow(triangle->hypotenuse, 2) - pow(triangle->oppose, 2));
     }
     else if (choix == 3)
     {
-        // Calculer le côté opposé
+        // Calculer le cÃ´tÃ© opposÃ©
         triangle->oppose = sqrt(pow(triangle->hypotenuse, 2) - pow(triangle->adjacent, 2));
     }
 }
@@ -352,7 +375,7 @@ void calculAngleEnRadians(Triangle* triangle)
     triangle->angle.radians = atan(triangle->oppose / triangle->adjacent);
 }
 
-// Fonction pour convertir l'angle en radians en degrés
+// Fonction pour convertir l'angle en radians en degrÃ©s
 void convertirAngleEnDegre(Triangle* triangle)
 {
     if (triangle->estDegre)
@@ -361,7 +384,7 @@ void convertirAngleEnDegre(Triangle* triangle)
     }
 }
 
-// Fonction pour calculer les fonctions trigonométriques
+// Fonction pour calculer les fonctions trigonomÃ©triques
 void calculTrigFonctions(Triangle* triangle)
 {
     triangle->sinus = triangle->oppose / triangle->hypotenuse;
@@ -392,14 +415,14 @@ void Trigo (void)
         printf("Entrez votre deuxieme choix (1-3) : ");
         scanf("%d", &choix2);
 
-        // Entrée des valeurs en fonction des choix
+        // EntrÃ©e des valeurs en fonction des choix
         if ((choix1 == 1 && choix2 == 2) || (choix1 == 2 && choix2 == 1))
         {
             printf("Entrez la valeur du cote adjacent : ");
             scanf("%f", &triangle.adjacent);
             printf("Entrez la valeur du cote oppose : ");
             scanf("%f", &triangle.oppose);
-            calculFaceManquante(&triangle, 1); // Calculer l'hypoténuse
+            calculFaceManquante(&triangle, 1); // Calculer l'hypotÃ©nuse
         }
         else if ((choix1 == 1 && choix2 == 3) || (choix1 == 3 && choix2 == 1))
         {
@@ -407,7 +430,7 @@ void Trigo (void)
             scanf("%f", &triangle.adjacent);
             printf("Entrez la valeur de l'hypotenuse : ");
             scanf("%f", &triangle.hypotenuse);
-            calculFaceManquante(&triangle, 3); // Calculer le côté opposé
+            calculFaceManquante(&triangle, 3); // Calculer le cÃ´tÃ© opposÃ©
         }
         else if ((choix1 == 2 && choix2 == 3) || (choix1 == 3 && choix2 == 2))
         {
@@ -415,7 +438,7 @@ void Trigo (void)
             scanf("%f", &triangle.oppose);
             printf("Entrez la valeur de l'hypotenuse : ");
             scanf("%f", &triangle.hypotenuse);
-            calculFaceManquante(&triangle, 2); // Calculer le côté adjacent
+            calculFaceManquante(&triangle, 2); // Calculer le cÃ´tÃ© adjacent
         }
         else 
         {
@@ -425,7 +448,7 @@ void Trigo (void)
         // Calcul de l'angle en radians
         calculAngleEnRadians(&triangle);
 
-        // Demander l'unité de l'angle
+        // Demander l'unitÃ© de l'angle
         printf("Voulez-vous l'angle en degres (1) ou en radians (2) ? ");
         scanf("%d", &uniteChoix);
         if (uniteChoix == 1)
@@ -434,10 +457,10 @@ void Trigo (void)
             convertirAngleEnDegre(&triangle);
         }
 
-        // Calcul des fonctions trigonométriques
+        // Calcul des fonctions trigonomÃ©triques
         calculTrigFonctions(&triangle);
 
-        // Afficher les résultats
+        // Afficher les rÃ©sultats
         printf("\nResultats :\n");
         printf("Cote adjacent : %.2f\n", triangle.adjacent);
         printf("Cote oppose : %.2f\n", triangle.oppose);
@@ -454,7 +477,8 @@ void Trigo (void)
         printf("Cosinus : %.2f\n", triangle.cosinus);
         printf("Tangente : %.2f\n", triangle.tangente);
 
-        log_trigonometrie(10, 15, 10, 15, 18, 0.5, 0.8, 1.5, 0.98);
+        // enregistrement des log trigo
+        log_trigonometrie(10, 15, triangle.adjacent, triangle.oppose, triangle.hypotenuse, triangle.sinus, triangle.cosinus, triangle.tangente, 0.98);
 }
 //Fonction principale
 void main(void)
@@ -470,6 +494,11 @@ void main(void)
 
     case 2: Trigo();
         break;
+
+    default:
+        break;
+    }
+}
 
     default:
         break;
