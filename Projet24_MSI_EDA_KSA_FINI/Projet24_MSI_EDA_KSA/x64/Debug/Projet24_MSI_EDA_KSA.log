@@ -1,0 +1,12 @@
+﻿  main.c
+C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(303,19): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(308,19): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(368,32): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(373,30): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(378,28): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(385,31): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(393,57): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(485,195): warning C4244: 'fonction' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(489,199): warning C4244: 'fonction' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\Projet24_MSI_EDA_KSA\main.c(493,197): warning C4244: 'fonction' : conversion de 'int' en 'float', perte possible de données
+  Projet24_MSI_EDA_KSA.vcxproj -> C:\Users\Karol\Desktop\LOGS\Projet24_MSI_EDA_KSA\x64\Debug\Projet24_MSI_EDA_KSA.exe
